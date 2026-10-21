@@ -65,7 +65,7 @@ func (s *MemoryCacheStore) Set(ctx context.Context, key string, value []byte, tt
 	return nil
 }
 
-// Expire 续约，ttl 单位为秒；key 不存在时返回 ErrCacheMiss
+// Expire 续约，ttl 单位为秒，小于等于 0 时改为永不过期；key 不存在时返回 ErrCacheMiss
 func (s *MemoryCacheStore) Expire(ctx context.Context, key string, ttl int64) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
