@@ -5,6 +5,7 @@ go 1.25.8
 require (
 	github.com/aliyun/alibabacloud-oss-go-sdk-v2 v1.6.1
 	github.com/redis/go-redis/v9 v9.18.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
