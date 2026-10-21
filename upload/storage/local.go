@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitee.com/hongjizhong/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload"
 )
 
 var _ upload.Storage = (*Local)(nil)

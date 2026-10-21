@@ -3,7 +3,7 @@
 常用 Go 工具包集合，每个子目录是一个独立的工具包。
 
 ```bash
-go get gitee.com/hongjizhong/toolkit
+go get github.com/hongji0309/toolkit
 ```
 
 ## 工具列表
@@ -17,8 +17,8 @@ go get gitee.com/hongjizhong/toolkit
 
 ```go
 import (
-	"gitee.com/hongjizhong/toolkit/cache"
-	"gitee.com/hongjizhong/toolkit/cache/store"
+	"github.com/hongji0309/toolkit/cache"
+	"github.com/hongji0309/toolkit/cache/store"
 )
 
 var c cache.CacheStore = store.NewMemoryCacheStore(time.Minute)
@@ -34,8 +34,8 @@ if errors.Is(err, store.ErrCacheMiss) {
 
 ```go
 import (
-	"gitee.com/hongjizhong/toolkit/upload"
-	"gitee.com/hongjizhong/toolkit/upload/storage"
+	"github.com/hongji0309/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload/storage"
 )
 
 // 本地存储
@@ -93,8 +93,8 @@ import (
 	"mime/multipart"
 	"time"
 
-	"gitee.com/hongjizhong/toolkit/upload"
-	"gitee.com/hongjizhong/toolkit/upload/storage"
+	"github.com/hongji0309/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload/storage"
 )
 
 // Category 文件类别

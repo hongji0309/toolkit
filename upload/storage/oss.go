@@ -11,7 +11,7 @@ import (
 	"github.com/aliyun/alibabacloud-oss-go-sdk-v2/oss"
 	"github.com/aliyun/alibabacloud-oss-go-sdk-v2/oss/credentials"
 
-	"gitee.com/hongjizhong/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload"
 )
 
 var _ upload.Storage = (*OSS)(nil)

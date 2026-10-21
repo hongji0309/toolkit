@@ -14,7 +14,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"gitee.com/hongjizhong/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload"
 )
 
 // 集成测试连接真实 OSS，读取项目根目录的 oss-test.yaml（可用 OSS_TEST_CONFIG 指定路径），文件不存在时跳过

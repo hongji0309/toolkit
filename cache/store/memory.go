@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"gitee.com/hongjizhong/toolkit/cache"
+	"github.com/hongji0309/toolkit/cache"
 )
 
 var _ cache.CacheStore = (*MemoryCacheStore)(nil)

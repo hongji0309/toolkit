@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"gitee.com/hongjizhong/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload"
 )
 
 func newTestLocal(t *testing.T) (*Local, string) {

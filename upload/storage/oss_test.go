@@ -17,7 +17,7 @@ import (
 
 	"github.com/aliyun/alibabacloud-oss-go-sdk-v2/oss"
 
-	"gitee.com/hongjizhong/toolkit/upload"
+	"github.com/hongji0309/toolkit/upload"
 )
 
 // fakeOSS 模拟 OSS 的路径风格接口，支持简单上传、分片上传、下载、HEAD 和批量删除

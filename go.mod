@@ -1,4 +1,4 @@
-module gitee.com/hongjizhong/toolkit
+module github.com/hongji0309/toolkit
 
 go 1.25.8
 
