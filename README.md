@@ -13,6 +13,7 @@ go get github.com/hongji0309/toolkit
 | [cache](cache) | 缓存存储接口 `CacheStore`，提供内存（`store.MemoryCacheStore`）和 Redis（`store.RedisCacheStore`）两种实现 |
 | [upload](upload) | 文件/图片上传，`Uploader` 负责大小、类型校验和生成存储路径，存储支持本地（`storage.Local`）和阿里云 OSS（`storage.OSS`） |
 | [excel](excel) | 列表数据导出为 xlsx，`Column[T]` 定义表头和取值，`ExportPaged` 分页查询并流式写入 |
+| [captcha](captcha) | 图形验证码，基于 base64Captcha 生成图片，答案存在 `cache.CacheStore` 中，校验一次即作废 |
 
 ## cache 使用示例
 
@@ -118,3 +119,38 @@ func (h *Handler) ExportUsers(c *gin.Context) {
 - 基于 excelize `StreamWriter` 按行写入，内存占用不随数据量增长；单个 sheet 写满 1048575 行后自动续表为 `用户_2`。
 - `Value` 返回 nil、nil 指针或零值时间时单元格为空；`time.Time` 默认格式为 `2006-01-02 15:04:05`，可用 `WithTimeLayout` 修改。
 - 出错时不会向 `w` 写入任何内容。xlsx 是 zip 格式，文件在全部数据写完后才一次性输出。
+
+## captcha 使用示例
+
+```go
+import (
+	"github.com/hongji0309/toolkit/cache/store"
+	"github.com/hongji0309/toolkit/captcha"
+)
+
+// 多实例部署时用 store.NewRedisCacheStore，保证生成与校验落在不同实例时也能取到答案
+c := captcha.New(store.NewMemoryCacheStore(time.Minute),
+	captcha.WithType(captcha.TypeDigit), // 或 captcha.TypeString（数字字母）
+	captcha.WithLength(4),
+	captcha.WithSize(240, 80),
+	captcha.WithTTL(3*time.Minute),
+)
+
+// 获取验证码接口：返回给前端，image 可直接作为 img 的 src
+id, image, err := c.Generate(ctx)
+
+// 登录时校验
+ok, err := c.Verify(ctx, req.CaptchaID, req.CaptchaCode)
+if err != nil {
+	// 存储出错
+}
+if !ok {
+	// 验证码错误或已过期，前端需重新获取
+}
+```
+
+说明：
+
+- 验证码无论校验对错都会作废，同一个 ID 不能重复尝试。
+- `TypeString` 去掉了易混淆的 0/O、1/I/L，校验忽略首尾空格、不区分大小写。
+- 校验时先读后删，并发提交同一个 ID 时有极小概率都通过；用于登录等场景足够。

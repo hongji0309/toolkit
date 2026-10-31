@@ -9,6 +9,7 @@
 | `cache` | 缓存接口 `CacheStore`（ttl 单位秒）；实现在 `cache/store`：`MemoryCacheStore`、`RedisCacheStore`，两者行为必须保持一致 |
 | `upload` | `Uploader` 负责大小、类型校验和生成存储路径；`Storage` 接口实现在 `upload/storage`：`Local`、`OSS`（阿里云 V2 SDK） |
 | `excel` | 基于 excelize 的 xlsx 工具。`excel.go` 放公共的 `Column[T]`，`export.go` 放导出（`Export`、`ExportPaged`、`DownloadWriter`）；以后的导入放 `import.go`，不另建包 |
+| `captcha` | 图形验证码，图片由 base64Captcha 生成（不对外暴露其类型），答案存在 `cache.CacheStore`，校验一次即作废 |
 
 接口定义放在包根，具体实现放子包（`cache/store`、`upload/storage`），实现文件里用 `var _ Iface = (*Impl)(nil)` 做编译期检查。
 
