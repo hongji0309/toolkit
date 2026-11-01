@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+.vscode/
+*.out
+*.test
+vendor/
+
+# 本地测试配置，含 AccessKey
+oss-test.yaml
